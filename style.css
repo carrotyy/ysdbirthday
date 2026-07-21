@@ -1,8 +1,8 @@
-
 body {
   margin: 0;
   background: #020202;
-  overflow: hidden; /* Tambahan sedikit biar nggak ada scroll bar */
+  overflow: hidden;
+  touch-action: none; /* Cegah layar HP ikut ter-scroll saat digeser */
 }
 
 canvas {
