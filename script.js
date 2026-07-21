@@ -170,13 +170,17 @@ const handleInput = (e) => {
 window.addEventListener('mousedown', (e) => { isTouching = true; handleInput(e); });
 window.addEventListener('mousemove', (e) => { if (isTouching) handleInput(e); });
 window.addEventListener('mouseup', () => isTouching = false);
-window.addEventListener('touchstart', (e) => { isTouching = true; handleInput(e); }, { passive: false });
+window.addEventListener('touchstart', (e) => { 
+  isTouching = true; 
+  handleInput(e); 
+}, { passive: true });
+
 window.addEventListener('touchmove', (e) => { 
   if (isTouching) {
-     if(window.scrollY < 100) e.preventDefault(); 
-     handleInput(e); 
+     handleInput(e); // Dapatkan koordinat kembang api tanpa menghentikan scroll
   } 
-}, { passive: false });
+}, { passive: true });
+
 window.addEventListener('touchend', () => isTouching = false);
 
 function jalankanKembangApi(){
