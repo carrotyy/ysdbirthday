@@ -111,7 +111,7 @@ class Birthday {
     ctx.globalCompositeOperation = 'lighter';
     for (let firework of this.fireworks) firework.update(delta);
 
-    this.counter += delta * 10; 
+    this.counter += delta * 0.5; 
     if (this.counter >= 1) {
       this.fireworks.push(new Firework(
         random(this.spawnA, this.spawnB),
