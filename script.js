@@ -195,7 +195,7 @@ const handleInput = (e) => {
   let y = e.clientY || (e.touches && e.touches[0].clientY);
   
   let now = timestamp();
-  if (now - lastSpawn > 50) { 
+  if (now - lastSpawn > 200) { 
     birthday.spawnAt(x, y);
     lastSpawn = now;
   }
