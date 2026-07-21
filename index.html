@@ -3,9 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Kejutan Kembang Api</title>
-  
-  <!-- Memanggil file style.css -->
+  <title>Kejutan Kembang Api & Tiup Lilin</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +17,6 @@
   <div id="layar-biru" class="layar">
     <h2 id="judul-tunggu">Menunggu Momen Spesial...</h2>
     
-    <!-- Tempat Countdown -->
     <div id="countdown">
       <div class="waktu"><span id="hari">00</span><small>Hari</small></div>
       <div class="waktu"><span id="jam">00</span><small>Jam</small></div>
@@ -27,14 +24,54 @@
       <div class="waktu"><span id="detik">00</span><small>Detik</small></div>
     </div>
 
-    <!-- Tombol ini awalnya disembunyikan -->
-    <button id="btn-world" class="tombol tersembunyi">Into Your Day</button>
+    <button id="btn-world" class="tombol tersembunyi">Into Your World</button>
   </div>
 
-  <!-- Kanvas Kembang Api (Paling Belakang) -->
+  <!-- PETUNJUK SCROLL (Muncul setelah kembang api mulai) -->
+  <div id="scroll-hint" class="tersembunyi">
+    Sentuh layarnya... <br>
+    Lalu scroll ke bawah ya! ⬇️
+  </div>
+
+  <!-- Kanvas Kembang Api (Dibuat fixed di belakang) -->
   <canvas id="birthday"></canvas>
 
-  <!-- Memanggil file script.js -->
+  <!-- BAGIAN KUE ULANG TAHUN (Di-scroll ke bawah) -->
+  <div class="cake-section">
+    <div class="container">
+      <div id="cake-container">
+        <!-- PASTIKAN GAMBAR KUE ADA DI FOLDER YANG BENAR -->
+        <img id="cake-png" src="cake.png" alt="Kue Ulang Tahun">
+        <canvas id="cake-candle-canvas"></canvas>
+  
+        <div class="greeting-card" id="greeting-card">
+          <div id="lottie-confetti" style="width:320px;max-width:90vw;margin:0 auto;"></div>
+  
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
+            <div id="congrats-message" style="display: none;">
+              Semoga harimu-harimu dipenuhi kebahagiaan dan tahun ini penuh dengan kejutan indah. Selamat Ulang Tahun!
+            </div>
+  
+            <div id="celebrate-message" style="display: none;">
+              🎉 Happy Birthday YUSDAA! 🎉
+              <!-- PASTIKAN AUDIO ADA DI FOLDER YANG BENAR -->
+              <audio id="lagu-mp3" src="lagu.mp3"></audio>
+            </div>
+  
+            <button class="btn-secondary" id="reset-btn" style="display: none;">Ulangi Lagi</button>
+          </div>
+        </div>
+      </div>
+  
+      <button class="btn-main" id="blow-instruction">Klik untuk meniup lilin!</button>
+  
+      <p style="margin-top: 20px; text-align: center;">Pertama, buatlah permohonan. Lalu katakan:</p>
+      <h2 style="margin-top: 5px; text-align: center;">"Happy birthday!" lalu tiup layarmu!</h2>
+    </div>
+  </div>
+
+  <!-- Script Lottie untuk Animasi Confetti -->
+  <script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
