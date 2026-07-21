@@ -9,7 +9,6 @@ const btnLights = document.getElementById('btn-lights');
 const btnWorld = document.getElementById('btn-world');
 const wadahCountdown = document.getElementById('countdown');
 const judulTunggu = document.getElementById('judul-tunggu');
-const scrollHint = document.getElementById('scroll-hint');
 
 let countdownInterval;
 
@@ -61,7 +60,7 @@ btnWorld.addEventListener('click', () => {
     then = timestamp();
     jalankanKembangApi();
   }, 1000);
-})
+});
 
 // ==========================================
 // 2. MESIN KEMBANG API 
@@ -154,7 +153,6 @@ class Firework {
   }
 }
 
-// Inisialisasi Kembang Api
 birthday = new Birthday();
 window.onresize = () => birthday.resize();
 
@@ -204,7 +202,6 @@ window.onload = function() {
   let shakeFrame = 0;
   let flameAngle = 0;
   let smokes = [];
-  let showCard = false;
   let isBlowDetected = false;
   let flameSize = 1.0;
   let blowIntensity = 0;
@@ -321,19 +318,20 @@ window.onload = function() {
 
   function showLottieCard() {
       const container = document.getElementById('lottie-confetti');
-      container.innerHTML = '';
-
-      lottie.loadAnimation({
-          container: container,
-          renderer: 'svg',
-          loop: false,
-          autoplay: true,
-          path: 'https://lottie.host/0ea60585-2a84-47f6-931e-f52310af3cea/kz77wRyH4j.json',
-          rendererSettings: { preserveAspectRatio: 'xMidYMid meet' }
-      }).addEventListener('complete', function() {
-          congratsMsg.style.display = 'block';
-          resetBtn.style.display = 'inline-block';
-      });
+      if (container) {
+          container.innerHTML = '';
+          lottie.loadAnimation({
+              container: container,
+              renderer: 'svg',
+              loop: false,
+              autoplay: true,
+              path: 'https://lottie.host/0ea60585-2a84-47f6-931e-f52310af3cea/kz77wRyH4j.json',
+              rendererSettings: { preserveAspectRatio: 'xMidYMid meet' }
+          }).addEventListener('complete', function() {
+              if (congratsMsg) congratsMsg.style.display = 'block';
+              if (resetBtn) resetBtn.style.display = 'inline-block';
+          });
+      }
   }
 
   function extinguishCandle() {
@@ -347,11 +345,8 @@ window.onload = function() {
       if (blowInstruction) blowInstruction.style.display = 'none';
       if (greetingCard) greetingCard.classList.add('show');
 
-      if (scrollHint) scrollHint.style.display = 'none';
-
       showLottieCard();
 
-      // REVISI ID AUDIO DI SINI
       const audio = document.getElementById('lagu-mp3'); 
       if (audio) {
           audio.currentTime = 0;
@@ -378,11 +373,10 @@ window.onload = function() {
       const confettiContainer = document.getElementById('lottie-confetti');
       if (confettiContainer) confettiContainer.innerHTML = '';
 
-      // REVISI ID AUDIO DI SINI
       const audio = document.getElementById('lagu-mp3');
       if (audio) { audio.pause(); audio.currentTime = 0; }
 
-      blowInstruction.textContent = "Klik untuk meniup lilin!";
+      if (blowInstruction) blowInstruction.textContent = "Klik untuk meniup lilin!";
       drawCandle(true, 0, false);
   }
   
