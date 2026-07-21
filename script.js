@@ -60,6 +60,8 @@ btnWorld.addEventListener('click', () => {
     // Mulai kembang api
     then = timestamp();
     jalankanKembangApi();
+  }, 1000); // Angka 1000 adalah jeda waktu 1 detik
+});
     
   
 });
