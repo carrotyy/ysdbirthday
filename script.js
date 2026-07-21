@@ -1,4 +1,75 @@
-// helper functions
+// Page Coundownd
+const targetDate = new Date('August 18, 2026 00:00:00').getTime();
+
+const layarHitam = document.getElementById('layar-hitam');
+const layarBiru = document.getElementById('layar-biru');
+const btnLights = document.getElementById('btn-lights');
+const btnWorld = document.getElementById('btn-world');
+const wadahCountdown = document.getElementById('countdown');
+const judulTunggu = document.getElementById('judul-tunggu');
+
+let countdownInterval;
+
+// 1. Saat "Turn On Lights" diklik
+btnLights.addEventListener('click', () => {
+  layarHitam.classList.add('hilang'); //
+  
+  setTimeout(() => {
+    layarHitam.style.display = 'none';
+    mulaiCountdown(); //
+  }, 2000);
+});
+
+// 
+function mulaiCountdown() {
+  function hitung() {
+    const sekarang = new Date().getTime();
+    const selisih = targetDate - sekarang;
+
+    // 
+    if (selisih <= 0) {
+      clearInterval(countdownInterval);
+      
+      //
+      wadahCountdown.classList.add('tersembunyi');
+      judulTunggu.innerHTML = "Waktunya Telah Tiba \u2728";
+      btnWorld.classList.remove('tersembunyi');
+      return;
+    }
+
+    // Kalkulasi hari, jam, menit, detik
+    const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+    const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+    const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+    // Tampilkan ke layar
+    document.getElementById('hari').innerText = hari.toString().padStart(2, '0');
+    document.getElementById('jam').innerText = jam.toString().padStart(2, '0');
+    document.getElementById('menit').innerText = menit.toString().padStart(2, '0');
+    document.getElementById('detik').innerText = detik.toString().padStart(2, '0');
+  }
+  
+  hitung(); // 
+  countdownInterval = setInterval(hitung, 1000);
+}
+
+// "Into Your World"
+btnWorld.addEventListener('click', () => {
+  layarBiru.classList.add('kembali-hitam');
+  
+  btnWorld.classList.add('hilang');
+  judulTunggu.classList.add('hilang');
+
+  setTimeout(() => {
+    layarBiru.classList.add('hilang');
+    
+    then = timestamp();
+    jalankanKembangApi();
+  }, 3000);
+});
+
+// KEMBANG API PAGE
 const PI2 = Math.PI * 2;
 const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
 const timestamp = _ => new Date().getTime();
@@ -138,36 +209,29 @@ const handleInput = (e) => {
   }
 };
 
-// 1. Event untuk Mouse (PC/Laptop)
-window.addEventListener('mousedown', (e) => {
-  isTouching = true;
-  handleInput(e);
-});
-window.addEventListener('mousemove', (e) => {
-  if (isTouching) handleInput(e);
-});
-window.addEventListener('mouseup', () => isTouching = false);
-
-// 2. Event untuk Layar Sentuh (HP/Tablet)
-window.addEventListener('touchstart', (e) => {
-  isTouching = true;
-  handleInput(e);
-}, { passive: false });
-
-window.addEventListener('touchmove', (e) => {
-  if (isTouching) {
-    e.preventDefault(); 
-    handleInput(e);
+// Sistem sentuh
+let isTouching = false;
+let lastSpawn = 0;
+const handleInput = (e) => {
+  let x = e.clientX || (e.touches && e.touches[0].clientX);
+  let y = e.clientY || (e.touches && e.touches[0].clientY);
+  let now = timestamp();
+  if (now - lastSpawn > 50) { 
+    birthday.spawnAt(x, y); lastSpawn = now;
   }
-}, { passive: false });
-
+};
+window.addEventListener('mousedown', (e) => { isTouching = true; handleInput(e); });
+window.addEventListener('mousemove', (e) => { if (isTouching) handleInput(e); });
+window.addEventListener('mouseup', () => isTouching = false);
+window.addEventListener('touchstart', (e) => { isTouching = true; handleInput(e); }, { passive: false });
+window.addEventListener('touchmove', (e) => { if (isTouching) { e.preventDefault(); handleInput(e); } }, { passive: false });
 window.addEventListener('touchend', () => isTouching = false);
 
-// --- ANIMATION LOOP ---
-;(function loop(){
-  requestAnimationFrame(loop);
+// fungsi agar tidak langsung nyala sejak awal
+function jalankanKembangApi(){
+  requestAnimationFrame(jalankanKembangApi);
   let now = timestamp();
   let delta = now - then;
   then = now;
   birthday.update(delta / 1000);
-})();
+}
