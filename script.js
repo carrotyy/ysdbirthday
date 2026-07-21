@@ -61,9 +61,7 @@ btnWorld.addEventListener('click', () => {
     then = timestamp();
     jalankanKembangApi();
     
-    // Tampilkan tulisan petunjuk scroll ke bawah
-    scrollHint.classList.remove('tersembunyi');
-  }, 3000);
+  
 });
 
 // ==========================================
