@@ -7,13 +7,13 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   font-family: Arial, sans-serif;
   background-color: #020202;
   color: #f3f3f3;
   overflow-x: hidden;
-  overflow-y: auto; /* Memastikan scroll vertikal aktif */
-  -webkit-overflow-scrolling: touch; /* Melancarkan scroll di browser iPhone/Safari */
+  overflow-y: auto; /* Memastikan scroll vertikal diizinkan */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll di Safari/iOS */
 }
 
 /* --- KEMBANG API & LAYAR PENUTUP --- */
@@ -25,7 +25,7 @@ canvas#birthday {
   width: 100vw;
   height: 100vh;
   z-index: 1; 
-  pointer-events: none; /* Agar sentuhan jari langsung menembus ke scroll */
+  pointer-events: none; /* KUNCI SCROLL HP: Jari menembus canvas kembang api */
 }
 
 .layar {
@@ -140,7 +140,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 224, 130, 0.3);
 }
 
-/* PERBAIKAN: Selector #celebrate-message sudah dipasang dengan benar */
+/* REVISI TULISAN YUSDAA: Warna PUTIH & Ukuran Lebih Besar */
 #celebrate-message {
   font-size: 2rem; 
   color: #ffffff; 
@@ -149,7 +149,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   text-align: center;
   display: none;
   animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), float 3s ease-in-out infinite;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .container h2 { color: #ffe082; margin: 10px 0 5px; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
