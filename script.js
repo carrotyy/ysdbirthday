@@ -59,6 +59,12 @@ btnWorld.addEventListener('click', () => {
     // Mulai kembang api
     then = timestamp();
     jalankanKembangApi();
+
+    // OTOMATIS SCROLL HALUS KE BAGIAN KUE DI HP
+    const cakeSection = document.querySelector('.cake-section');
+    if (cakeSection) {
+      cakeSection.scrollIntoView({ behavior: 'smooth' });
+    }
   }, 1000);
 });
 
@@ -155,33 +161,6 @@ class Firework {
 
 birthday = new Birthday();
 window.onresize = () => birthday.resize();
-
-let isTouching = false;
-let lastSpawn = 0;
-const handleInput = (e) => {
-  let x = e.clientX || (e.touches && e.touches[0].clientX);
-  let y = e.clientY || (e.touches && e.touches[0].clientY);
-  let now = timestamp();
-  if (now - lastSpawn > 200) { 
-    birthday.spawnAt(x, y); lastSpawn = now;
-  }
-};
-
-window.addEventListener('mousedown', (e) => { isTouching = true; handleInput(e); });
-window.addEventListener('mousemove', (e) => { if (isTouching) handleInput(e); });
-window.addEventListener('mouseup', () => isTouching = false);
-window.addEventListener('touchstart', (e) => { 
-  isTouching = true; 
-  handleInput(e); 
-}, { passive: true });
-
-window.addEventListener('touchmove', (e) => { 
-  if (isTouching) {
-     handleInput(e); // Dapatkan koordinat kembang api tanpa menghentikan scroll
-  } 
-}, { passive: true });
-
-window.addEventListener('touchend', () => isTouching = false);
 
 function jalankanKembangApi(){
   requestAnimationFrame(jalankanKembangApi);
@@ -349,7 +328,7 @@ window.onload = function() {
       if (candleCanvas) candleCanvas.classList.add('candle-off');
       if (celebrateMsg) celebrateMsg.style.display = 'block';
       if (blowInstruction) blowInstruction.style.display = 'none';
-      if (instructionText) instructionText.style.display = 'none'; // <-- HILANGKAN TEKS PETUNJUK
+      if (instructionText) instructionText.style.display = 'none'; // MENYEMBUNYIKAN PETUNJUK
       if (greetingCard) greetingCard.classList.add('show');
 
       showLottieCard();
@@ -375,7 +354,7 @@ window.onload = function() {
       if (candleCanvas) candleCanvas.classList.remove('candle-off');
       if (celebrateMsg) celebrateMsg.style.display = 'none';
       if (blowInstruction) blowInstruction.style.display = 'inline-block';
-      if (instructionText) instructionText.style.display = 'block'; // <-- TAMPILKAN LAGI SAAT DI-RESET
+      if (instructionText) instructionText.style.display = 'block';
       if (greetingCard) greetingCard.classList.remove('show');
       if (congratsMsg) congratsMsg.style.display = 'none';
       if (resetBtn) resetBtn.style.display = 'none';
