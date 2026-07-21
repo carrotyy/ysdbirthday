@@ -6,7 +6,6 @@
 }
 
 body {
-  /* Font disamakan dengan tampilan awal */
   font-family: Arial, sans-serif;
   background-color: #020202;
   color: #f3f3f3;
@@ -23,6 +22,7 @@ canvas#birthday {
   width: 100vw;
   height: 100vh;
   z-index: 1; 
+  pointer-events: none; /* Agar sentuhan jari menembus ke scroll */
 }
 
 .layar {
@@ -42,11 +42,14 @@ canvas#birthday {
 #layar-hitam { background-color: #000000; z-index: 30; }
 #layar-biru { background-color: #051024; z-index: 20; }
 
-.hilang { opacity: 0; pointer-events: none; }
+/* PERBAIKAN: Ditambah pointer-events & display agar tidak ngunci layar HP */
+.hilang { 
+  opacity: 0; 
+  pointer-events: none !important; 
+  display: none !important; 
+}
 .kembali-hitam { background-color: #000000 !important; }
 .tersembunyi { display: none !important; }
-
-}
 
 /* --- GAYA TAMPILAN COUNTDOWN & TOMBOL --- */
 h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: center; }
@@ -101,7 +104,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 }
 
 /* Gambar kue SVG/PNG */
-#cake-svg-img {
+#cake-png, #cake-svg-img {
   width: 100%;
   height: auto;
   display: block;
@@ -134,26 +137,31 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   text-align: center;
   line-height: 1.5; 
   display: block; 
-  /* margin-top dihapus agar tidak bentrok ke bawah */
   animation: fadeIn 0.8s ease-out, subtleGlow 2s ease-in-out infinite alternate;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 224, 130, 0.3);
 }
 
-#celebrate-message {
-  font-size: 1.5rem; 
-  color: #ff4081; 
+font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
+  color: #ffffff;  /* Dibuat warna PUTIH */
   font-weight: bold; 
-  margin: 10px 0; 
+  margin: 15px 0; 
   text-align: center;
   display: none;
   animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), float 3s ease-in-out infinite;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 12px rgba(255, 64, 129, 0.4);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsif untuk HP agar tulisan besar tetap pas di layar */
+@media (max-width: 768px) {
+  #celebrate-message { 
+    font-size: 1.6rem; 
+  }
 }
 
 .container h2 { color: #ffe082; margin: 10px 0 5px; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
 .container p { color: #b0bec5; font-size: 1rem; margin-bottom: 8px; text-align: center; }
 
-/* Buttons Tiup (Disesuaikan gayanya dengan .tombol Turn on Lights) */
+/* Buttons Tiup */
 .btn-main, .btn-secondary {
   padding: 15px 40px; 
   font-size: 14px; 
@@ -185,7 +193,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 .greeting-card {
   position: absolute; 
   left: 50%; 
-  top: 50%; /* Diangkat ke tengah kue */
+  top: 50%; 
   transform: translate(-50%, -50%); 
   z-index: 15;
   width: 90%; 
