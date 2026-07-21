@@ -22,19 +22,19 @@ class Birthday {
     this.spawnD = this.height * .5
   }
   
-  onClick(evt) {
-     let x = evt.clientX || evt.touches && evt.touches[0].pageX
-     let y = evt.clientY || evt.touches && evt.touches[0].pageY
-     
-     let count = random(3,5)
-     for(let i = 0; i < count; i++) this.fireworks.push(new Firework(
-        random(this.spawnA, this.spawnB),
-        this.height,
-        x,
-        y,
-        random(0, 260),
-        random(30, 110)))
-          
+  // Fungsi untuk memunculkan kembang api di koordinat tertentu (x, y)
+  spawnAt(x, y) {
+     let count = random(3, 5)
+     for(let i = 0; i < count; i++) {
+       this.fireworks.push(new Firework(
+          random(this.spawnA, this.spawnB),
+          this.height,
+          x,
+          y,
+          random(0, 360),
+          random(30, 110)
+       ))
+     }
      this.counter = -1
   }
   
@@ -120,8 +120,26 @@ let then = timestamp()
 let birthday = new Birthday
 
 window.onresize = () => birthday.resize()
-document.onclick = evt => birthday.onClick(evt)
-document.ontouchstart = evt => birthday.onClick(evt)
+
+// --- PENANGANAN SENTUHAN & KLIK ---
+let isTouching = false
+
+// Saat layar disentuh/diklik
+window.addEventListener('pointerdown', (e) => {
+  isTouching = true
+  birthday.spawnAt(e.clientX, e.clientY)
+})
+
+// Saat jari/mouse digeser di atas layar
+window.addEventListener('pointermove', (e) => {
+  if (isTouching) {
+    birthday.spawnAt(e.clientX, e.clientY)
+  }
+})
+
+// Saat sentuhan/klik dilepas
+window.addEventListener('pointerup', () => isTouching = false)
+window.addEventListener('pointercancel', () => isTouching = false)
 
 ;(function loop(){
   requestAnimationFrame(loop)
