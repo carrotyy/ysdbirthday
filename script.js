@@ -340,9 +340,12 @@ window.onload = function() {
       blowing = false;
       smokes = [];
 
+      const instructionText = document.getElementById('instruction-text');
+
       if (candleCanvas) candleCanvas.classList.add('candle-off');
       if (celebrateMsg) celebrateMsg.style.display = 'block';
       if (blowInstruction) blowInstruction.style.display = 'none';
+      if (instructionText) instructionText.style.display = 'none'; // <-- HILANGKAN TEKS PETUNJUK
       if (greetingCard) greetingCard.classList.add('show');
 
       showLottieCard();
@@ -363,9 +366,12 @@ window.onload = function() {
       flameOn = true; blowing = false; shakeFrame = 0; flameAngle = 0; smokes = [];
       flameSize = 1.0; isBlowDetected = false; blowIntensity = 0;
 
+      const instructionText = document.getElementById('instruction-text');
+
       if (candleCanvas) candleCanvas.classList.remove('candle-off');
       if (celebrateMsg) celebrateMsg.style.display = 'none';
       if (blowInstruction) blowInstruction.style.display = 'inline-block';
+      if (instructionText) instructionText.style.display = 'block'; // <-- TAMPILKAN LAGI SAAT DI-RESET
       if (greetingCard) greetingCard.classList.remove('show');
       if (congratsMsg) congratsMsg.style.display = 'none';
       if (resetBtn) resetBtn.style.display = 'none';
