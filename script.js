@@ -138,8 +138,9 @@ class Firework {
       if (this.offsprings && !this.madeChilds) {
         let babies = this.offsprings / 2;
         for (let i = 0; i < babies; i++) {
-          let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0;
-          let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0;
+          // Perkalian 2.5 agar diameter ledakan mekar jauh lebih BESAR & MEWAH
+          let targetX = this.x + (this.offsprings * 2.5) * Math.cos(PI2 * i / babies) | 0;
+          let targetY = this.y + (this.offsprings * 2.5) * Math.sin(PI2 * i / babies) | 0;
           birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0));
         }
       }
@@ -150,11 +151,13 @@ class Firework {
         for (let i = 0; this.history.length > i; i++) {
           let point = this.history[i];
           ctx.beginPath(); ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)';
-          ctx.arc(point.x, point.y, 1, 0, PI2, false); ctx.fill();
+          ctx.arc(point.x, point.y, 2.5, 0, PI2, false); 
+          ctx.fill(); // <-- Ditambahkan ctx.fill() agar garis ekor tergambar
         } 
       } else {
       ctx.beginPath(); ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)';
-      ctx.arc(this.x, this.y, 1, 0, PI2, false); ctx.fill();
+      ctx.arc(this.x, this.y, 3.5, 0, PI2, false); // Ukuran percikan diperbesar jadi 3.5
+      ctx.fill(); // <-- Ditambahkan ctx.fill() agar bintik ledakan tergambar
     }
   }
 }
@@ -169,7 +172,6 @@ function jalankanKembangApi(){
   then = now;
   birthday.update(delta / 1000);
 }
-
 // ==========================================
 // 3. MESIN TIUP LILIN VIRTUAL
 // ==========================================
