@@ -1,52 +1,52 @@
 // helper functions
-const PI2 = Math.PI * 2
-const random = (min, max) => Math.random() * (max - min + 1) + min | 0
-const timestamp = _ => new Date().getTime()
+const PI2 = Math.PI * 2;
+const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
+const timestamp = _ => new Date().getTime();
 
 // container
 class Birthday {
   constructor() {
-    this.resize()
-    this.fireworks = []
-    this.counter = 0
+    this.resize();
+    this.fireworks = [];
+    this.counter = 0;
   }
   
   resize() {
-    this.width = canvas.width = window.innerWidth
-    let center = this.width / 2 | 0
-    this.spawnA = center - center / 4 | 0
-    this.spawnB = center + center / 4 | 0
+    this.width = canvas.width = window.innerWidth;
+    let center = this.width / 2 | 0;
+    this.spawnA = center - center / 4 | 0;
+    this.spawnB = center + center / 4 | 0;
     
-    this.height = canvas.height = window.innerHeight
-    this.spawnC = this.height * .1
-    this.spawnD = this.height * .5
+    this.height = canvas.height = window.innerHeight;
+    this.spawnC = this.height * .1;
+    this.spawnD = this.height * .5;
   }
   
-  // Fungsi untuk memunculkan kembang api di koordinat tertentu (x, y)
+  
   spawnAt(x, y) {
-     let count = random(3, 5)
+     let count = random(3, 5);
      for(let i = 0; i < count; i++) {
        this.fireworks.push(new Firework(
           random(this.spawnA, this.spawnB),
           this.height,
           x,
           y,
-          random(0, 360),
+          random(0, 260),
           random(30, 110)
-       ))
+       ));
      }
-     this.counter = -1
+     this.counter = -1;
   }
   
   update(delta) {
-    ctx.globalCompositeOperation = 'hard-light'
-    ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`
-    ctx.fillRect(0, 0, this.width, this.height)
+    ctx.globalCompositeOperation = 'hard-light';
+    ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`;
+    ctx.fillRect(0, 0, this.width, this.height);
 
-    ctx.globalCompositeOperation = 'lighter'
-    for (let firework of this.fireworks) firework.update(delta)
+    ctx.globalCompositeOperation = 'lighter';
+    for (let firework of this.fireworks) firework.update(delta);
 
-    this.counter += delta * 3 
+    this.counter += delta * 3; 
     if (this.counter >= 1) {
       this.fireworks.push(new Firework(
         random(this.spawnA, this.spawnB),
@@ -54,97 +54,120 @@ class Birthday {
         random(0, this.width),
         random(this.spawnC, this.spawnD),
         random(0, 360),
-        random(30, 110)))
-      this.counter = 0
+        random(30, 110)));
+      this.counter = 0;
     }
 
-    if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+    if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead);
   }
 }
 
 class Firework {
   constructor(x, y, targetX, targetY, shade, offsprings) {
-    this.dead = false
-    this.offsprings = offsprings
-    this.x = x
-    this.y = y
-    this.targetX = targetX
-    this.targetY = targetY
-    this.shade = shade
-    this.history = []
+    this.dead = false;
+    this.offsprings = offsprings;
+    this.x = x;
+    this.y = y;
+    this.targetX = targetX;
+    this.targetY = targetY;
+    this.shade = shade;
+    this.history = [];
   }
   update(delta) {
-    if (this.dead) return
+    if (this.dead) return;
 
-    let xDiff = this.targetX - this.x
-    let yDiff = this.targetY - this.y
+    let xDiff = this.targetX - this.x;
+    let yDiff = this.targetY - this.y;
     if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) {
-      this.x += xDiff * 2 * delta
-      this.y += yDiff * 2 * delta
-      this.history.push({ x: this.x, y: this.y })
-      if (this.history.length > 20) this.history.shift()
+      this.x += xDiff * 2 * delta;
+      this.y += yDiff * 2 * delta;
+      this.history.push({ x: this.x, y: this.y });
+      if (this.history.length > 20) this.history.shift();
     } else {
       if (this.offsprings && !this.madeChilds) {
-        let babies = this.offsprings / 2
+        let babies = this.offsprings / 2;
         for (let i = 0; i < babies; i++) {
-          let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
-          let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0
-          birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
+          let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0;
+          let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0;
+          birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0));
         }
       }
-      this.madeChilds = true
-      this.history.shift()
+      this.madeChilds = true;
+      this.history.shift();
     }
     
-    if (this.history.length === 0) this.dead = true
+    if (this.history.length === 0) this.dead = true;
     else if (this.offsprings) { 
         for (let i = 0; this.history.length > i; i++) {
-          let point = this.history[i]
-          ctx.beginPath()
-          ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
-          ctx.arc(point.x, point.y, 1, 0, PI2, false)
-          ctx.fill()
+          let point = this.history[i];
+          ctx.beginPath();
+          ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)';
+          ctx.arc(point.x, point.y, 1, 0, PI2, false);
+          ctx.fill();
         } 
       } else {
-      ctx.beginPath()
-      ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
-      ctx.arc(this.x, this.y, 1, 0, PI2, false)
-      ctx.fill()
+      ctx.beginPath();
+      ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)';
+      ctx.arc(this.x, this.y, 1, 0, PI2, false);
+      ctx.fill();
     }
   }
 }
 
-let canvas = document.getElementById('birthday')
-let ctx = canvas.getContext('2d')
-let then = timestamp()
-let birthday = new Birthday
+let canvas = document.getElementById('birthday');
+let ctx = canvas.getContext('2d');
+let then = timestamp();
+let birthday = new Birthday(); // 
 
-window.onresize = () => birthday.resize()
+window.onresize = () => birthday.resize();
 
-// --- PENANGANAN SENTUHAN & KLIK ---
-let isTouching = false
+// ---  KLIK & SENTUH ) ---
+let isTouching = false;
+let lastSpawn = 0;
 
-// Saat layar disentuh/diklik
-window.addEventListener('pointerdown', (e) => {
-  isTouching = true
-  birthday.spawnAt(e.clientX, e.clientY)
-})
-
-// Saat jari/mouse digeser di atas layar
-window.addEventListener('pointermove', (e) => {
-  if (isTouching) {
-    birthday.spawnAt(e.clientX, e.clientY)
+const handleInput = (e) => {
+  // 
+  let x = e.clientX || (e.touches && e.touches[0].clientX);
+  let y = e.clientY || (e.touches && e.touches[0].clientY);
+  
+  let now = timestamp();
+  // 
+  if (now - lastSpawn > 50) { 
+    birthday.spawnAt(x, y);
+    lastSpawn = now;
   }
-})
+};
 
-// Saat sentuhan/klik dilepas
-window.addEventListener('pointerup', () => isTouching = false)
-window.addEventListener('pointercancel', () => isTouching = false)
+// 1. Event untuk Mouse (PC/Laptop)
+window.addEventListener('mousedown', (e) => {
+  isTouching = true;
+  handleInput(e);
+});
+window.addEventListener('mousemove', (e) => {
+  if (isTouching) handleInput(e);
+});
+window.addEventListener('mouseup', () => isTouching = false);
 
+// 2. Event untuk Layar Sentuh (HP/Tablet)
+window.addEventListener('touchstart', (e) => {
+  isTouching = true;
+  handleInput(e);
+}, { passive: false });
+
+window.addEventListener('touchmove', (e) => {
+  if (isTouching) {
+    e.preventDefault(); 
+    handleInput(e);
+  }
+}, { passive: false });
+
+window.addEventListener('touchend', () => isTouching = false);
+
+// --- ANIMATION LOOP ---
 ;(function loop(){
-  requestAnimationFrame(loop)
-  let now = timestamp()
-  let delta = now - then
-  then = now
-  birthday.update(delta / 1000)
-})()
+  requestAnimationFrame(loop);
+  let now = timestamp();
+  let delta = now - then;
+  then = now;
+  birthday.update(delta / 1000);
+})();
