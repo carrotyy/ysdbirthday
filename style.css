@@ -8,3 +8,45 @@ body {
 canvas {
   display: block;
 }
+
+/* Halaman Intro */
+#intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #020202; /* Warna  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Memastikan intro berada DI ATAS kembang api */
+  color: white;
+  font-family: Arial, sans-serif;
+  transition: opacity 0.5s ease; /* Animasi mulus saat intro menghilang */
+}
+
+#intro h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Gaya untuk Tombol */
+#startBtn {
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  background-color: #ff4757; /* Warna tombol merah muda/merah */
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+  transition: transform 0.2s;
+}
+
+/* Efek saat tombol disentuh/didekati mouse */
+#startBtn:hover {
+  transform: scale(1.1);
+}
