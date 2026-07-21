@@ -1,4 +1,4 @@
-// Page Countdown
+// --- 1. SISTEM COUNTDOWN & LAYAR ---
 const targetDate = new Date('August 18, 2026 00:00:00').getTime();
 
 const layarHitam = document.getElementById('layar-hitam');
@@ -10,7 +10,7 @@ const judulTunggu = document.getElementById('judul-tunggu');
 
 let countdownInterval;
 
-// 1. Saat "Turn On Lights" diklik
+// Saat "Turn On Lights" diklik
 btnLights.addEventListener('click', () => {
   layarHitam.classList.add('hilang');
   
@@ -26,7 +26,6 @@ function mulaiCountdown() {
     const sekarang = new Date().getTime();
     const selisih = targetDate - sekarang;
 
-    // Jika target waktu sudah lewat
     if (selisih <= 0) {
       clearInterval(countdownInterval);
       
@@ -36,13 +35,11 @@ function mulaiCountdown() {
       return;
     }
 
-    // Kalkulasi hari, jam, menit, detik
     const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
     const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
     const detik = Math.floor((selisih % (1000 * 60)) / 1000);
 
-    // Tampilkan ke layar
     document.getElementById('hari').innerText = hari.toString().padStart(2, '0');
     document.getElementById('jam').innerText = jam.toString().padStart(2, '0');
     document.getElementById('menit').innerText = menit.toString().padStart(2, '0');
@@ -53,7 +50,7 @@ function mulaiCountdown() {
   countdownInterval = setInterval(hitung, 1000);
 }
 
-// 2. Saat "Into Your World" diklik
+// Saat "Into Your World" diklik
 btnWorld.addEventListener('click', () => {
   layarBiru.classList.add('kembali-hitam');
   
@@ -68,12 +65,11 @@ btnWorld.addEventListener('click', () => {
   }, 3000);
 });
 
-// --- KEMBANG API PAGE ---
+// --- 2. MESIN KEMBANG API ---
 const PI2 = Math.PI * 2;
 const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
 const timestamp = _ => new Date().getTime();
 
-// container
 class Birthday {
   constructor() {
     this.resize();
@@ -212,7 +208,6 @@ window.addEventListener('touchstart', (e) => { isTouching = true; handleInput(e)
 window.addEventListener('touchmove', (e) => { if (isTouching) { e.preventDefault(); handleInput(e); } }, { passive: false });
 window.addEventListener('touchend', () => isTouching = false);
 
-// fungsi agar tidak langsung nyala sejak awal
 function jalankanKembangApi(){
   requestAnimationFrame(jalankanKembangApi);
   let now = timestamp();
