@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Kembang Api Saja</title>
-    <!-- Menghubungkan berkas CSS -->
+    <title>Kejutan Kembang Api</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <!-- Tempat kembang api muncul -->
+    <!-- LAYAR PERTAMA: Gelap Gulita -->
+    <div id="layar-hitam" class="layar">
+      <button id="btn-lights" class="tombol">Turn On Lights</button>
+    </div>
+
+    <!-- LAYAR KEDUA: Biru Gelap dengan Countdown -->
+    <div id="layar-biru" class="layar">
+      <h2 id="judul-tunggu">Menunggu Momen Spesial...</h2>
+      
+      <!-- Tempat Countdown -->
+      <div id="countdown">
+        <div class="waktu"><span id="hari">00</span><small>Hari</small></div>
+        <div class="waktu"><span id="jam">00</span><small>Jam</small></div>
+        <div class="waktu"><span id="menit">00</span><small>Menit</small></div>
+        <div class="waktu"><span id="detik">00</span><small>Detik</small></div>
+      </div>
+
+      <!-- Tombol ini awalnya disembunyikan -->
+      <button id="btn-world" class="tombol tersembunyi">Into Your World</button>
+    </div>
+
+    <!-- Kanvas Kembang Api (Paling Belakang) -->
     <canvas id="birthday"></canvas>
 
-    <!-- Menghubungkan berkas JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>
