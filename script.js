@@ -1,5 +1,5 @@
 // --- 1. SISTEM COUNTDOWN & LAYAR ---
-const targetDate = new Date('August 18, 2025 00:00:00').getTime();
+const targetDate = new Date('July 21, 2026 18:21:00').getTime();
 
 const layarHitam = document.getElementById('layar-hitam');
 const layarBiru = document.getElementById('layar-biru');
