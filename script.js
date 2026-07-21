@@ -1,4 +1,4 @@
-// Page Coundownd
+// Page Countdown
 const targetDate = new Date('August 18, 2026 00:00:00').getTime();
 
 const layarHitam = document.getElementById('layar-hitam');
@@ -12,25 +12,24 @@ let countdownInterval;
 
 // 1. Saat "Turn On Lights" diklik
 btnLights.addEventListener('click', () => {
-  layarHitam.classList.add('hilang'); //
+  layarHitam.classList.add('hilang');
   
   setTimeout(() => {
     layarHitam.style.display = 'none';
-    mulaiCountdown(); //
+    mulaiCountdown();
   }, 2000);
 });
 
-// 
+// Fungsi Mulai Countdown
 function mulaiCountdown() {
   function hitung() {
     const sekarang = new Date().getTime();
     const selisih = targetDate - sekarang;
 
-    // 
+    // Jika target waktu sudah lewat
     if (selisih <= 0) {
       clearInterval(countdownInterval);
       
-      //
       wadahCountdown.classList.add('tersembunyi');
       judulTunggu.innerHTML = "Waktunya Telah Tiba \u2728";
       btnWorld.classList.remove('tersembunyi');
@@ -50,11 +49,11 @@ function mulaiCountdown() {
     document.getElementById('detik').innerText = detik.toString().padStart(2, '0');
   }
   
-  hitung(); // 
+  hitung();
   countdownInterval = setInterval(hitung, 1000);
 }
 
-// "Into Your World"
+// 2. Saat "Into Your World" diklik
 btnWorld.addEventListener('click', () => {
   layarBiru.classList.add('kembali-hitam');
   
@@ -69,7 +68,7 @@ btnWorld.addEventListener('click', () => {
   }, 3000);
 });
 
-// KEMBANG API PAGE
+// --- KEMBANG API PAGE ---
 const PI2 = Math.PI * 2;
 const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
 const timestamp = _ => new Date().getTime();
@@ -92,7 +91,6 @@ class Birthday {
     this.spawnC = this.height * .1;
     this.spawnD = this.height * .5;
   }
-  
   
   spawnAt(x, y) {
      let count = random(3, 5);
@@ -188,38 +186,25 @@ class Firework {
 let canvas = document.getElementById('birthday');
 let ctx = canvas.getContext('2d');
 let then = timestamp();
-let birthday = new Birthday(); // 
+let birthday = new Birthday();
 
 window.onresize = () => birthday.resize();
 
-// ---  KLIK & SENTUH ) ---
+// --- KLIK & SENTUH ---
 let isTouching = false;
 let lastSpawn = 0;
 
 const handleInput = (e) => {
-  // 
   let x = e.clientX || (e.touches && e.touches[0].clientX);
   let y = e.clientY || (e.touches && e.touches[0].clientY);
   
   let now = timestamp();
-  // 
   if (now - lastSpawn > 50) { 
     birthday.spawnAt(x, y);
     lastSpawn = now;
   }
 };
 
-// Sistem sentuh
-let isTouching = false;
-let lastSpawn = 0;
-const handleInput = (e) => {
-  let x = e.clientX || (e.touches && e.touches[0].clientX);
-  let y = e.clientY || (e.touches && e.touches[0].clientY);
-  let now = timestamp();
-  if (now - lastSpawn > 50) { 
-    birthday.spawnAt(x, y); lastSpawn = now;
-  }
-};
 window.addEventListener('mousedown', (e) => { isTouching = true; handleInput(e); });
 window.addEventListener('mousemove', (e) => { if (isTouching) handleInput(e); });
 window.addEventListener('mouseup', () => isTouching = false);
