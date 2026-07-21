@@ -66,7 +66,6 @@ btnWorld.addEventListener('click', () => {
   }, 3000);
 });
 
-
 // ==========================================
 // 2. MESIN KEMBANG API 
 // ==========================================
@@ -172,14 +171,13 @@ const handleInput = (e) => {
     birthday.spawnAt(x, y); lastSpawn = now;
   }
 };
-// Event listener tetap dijalankan di area layar
+
 window.addEventListener('mousedown', (e) => { isTouching = true; handleInput(e); });
 window.addEventListener('mousemove', (e) => { if (isTouching) handleInput(e); });
 window.addEventListener('mouseup', () => isTouching = false);
 window.addEventListener('touchstart', (e) => { isTouching = true; handleInput(e); }, { passive: false });
 window.addEventListener('touchmove', (e) => { 
   if (isTouching) {
-     // Hanya preventDefault jika sedang tidak scroll jauh ke bawah (biar bisa scroll)
      if(window.scrollY < 100) e.preventDefault(); 
      handleInput(e); 
   } 
@@ -194,7 +192,6 @@ function jalankanKembangApi(){
   birthday.update(delta / 1000);
 }
 
-
 // ==========================================
 // 3. MESIN TIUP LILIN VIRTUAL
 // ==========================================
@@ -202,7 +199,6 @@ window.onload = function() {
   const candleCanvas = document.getElementById('cake-candle-canvas');
   const candleCtx = candleCanvas.getContext('2d');
 
-  // Mengatur ukuran canvas lilin
   candleCanvas.width = 50;
   candleCanvas.height = 100;
 
@@ -235,18 +231,15 @@ window.onload = function() {
   function drawCandle(flame = true, flameShake = 0, smoke = false) {
       candleCtx.clearRect(0, 0, candleCanvas.width, candleCanvas.height);
 
-      // Badan Lilin
       candleCtx.save();
       candleCtx.fillStyle = "#f8bbd0";
       candleCtx.fillRect(18, 38, 8, 40);
 
-      // Bagian atas lilin
       candleCtx.beginPath();
       candleCtx.ellipse(22, 38, 4, 2, 0, 0, 2 * Math.PI);
       candleCtx.fillStyle = "#e57373";
       candleCtx.fill();
 
-      // Sumbu Lilin
       candleCtx.strokeStyle = "#333";
       candleCtx.lineWidth = 1.5;
       candleCtx.beginPath();
@@ -255,18 +248,15 @@ window.onload = function() {
       candleCtx.stroke();
       candleCtx.restore();
 
-      // Api Lilin
       if (flame) {
           let flick = 0;
           if (isBlowDetected) {
               flick = Math.sin(shakeFrame) * 2;
           }
 
-          // Menghitung batas ukuran api
           let flameHeight = Math.max(1, 13 * flameSize + flick);
           let flameWidth = Math.max(0.5, 4.5 * flameSize);
 
-          // Glow Api Luar
           candleCtx.save();
           candleCtx.globalAlpha = 0.4 * flameSize;
           candleCtx.beginPath();
@@ -277,7 +267,6 @@ window.onload = function() {
           candleCtx.fill();
           candleCtx.restore();
 
-          // Inti Kuning Api
           candleCtx.save();
           candleCtx.globalAlpha = 0.8 * flameSize;
           candleCtx.beginPath();
@@ -288,7 +277,6 @@ window.onload = function() {
           candleCtx.fill();
           candleCtx.restore();
 
-          // Tengah Orange
           candleCtx.save();
           candleCtx.globalAlpha = 0.6 * flameSize;
           candleCtx.beginPath();
@@ -300,7 +288,6 @@ window.onload = function() {
           candleCtx.restore();
       }
 
-      // Asap setelah padam
       if(smoke) drawSmokes();
   }
 
@@ -363,7 +350,6 @@ window.onload = function() {
       if (blowInstruction) blowInstruction.style.display = 'none';
       if (greetingCard) greetingCard.classList.add('show');
 
-      // Hilangkan teks scroll setelah kue meledak bahagia
       if (scrollHint) scrollHint.style.display = 'none';
 
       showLottieCard();
@@ -401,11 +387,10 @@ window.onload = function() {
       drawCandle(true, 0, false);
   }
 
-  // --- SISTEM DETEKSI SUARA (MIC) ---
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new Recognition();
-      recognition.lang = 'en-US'; // Bisa diganti 'id-ID' namun 'en-US' lebih sensitif mendeteksi noise angin
+      recognition.lang = 'en-US';
       recognition.continuous = true;
       recognition.interimResults = true;
       recognition.maxAlternatives = 3;
@@ -448,7 +433,6 @@ window.onload = function() {
                   }, 700);
               }
 
-              // Deteksi desisan angin (tiupan)
               const transcript = result[0]?.transcript?.toLowerCase() || '';
               if (transcript.includes('who') || transcript.includes('fuh') || transcript.includes('shh') || result[0]?.confidence < 0.4) {
                   blowIntensity += 0.2;
@@ -477,7 +461,6 @@ window.onload = function() {
 
   if (resetBtn) resetBtn.onclick = resetAll;
 
-  // Jalankan animasi lilin awal
   drawCandle(true, 0, false);
   animateCandle();
 };
