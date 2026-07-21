@@ -60,8 +60,8 @@ btnWorld.addEventListener('click', () => {
     // Mulai kembang api
     then = timestamp();
     jalankanKembangApi();
-  }, 1000); // Angka 1000 adalah jeda waktu 1 detik
-});
+  }, 1000);
+})
     
   
 });
@@ -354,13 +354,14 @@ window.onload = function() {
 
       showLottieCard();
 
-      const audio = document.getElementById('birthday-audio');
+      // REVISI ID AUDIO DI SINI
+      const audio = document.getElementById('lagu-mp3'); 
       if (audio) {
           audio.currentTime = 0;
           audio.play().catch(e => console.log('Terdapat error saat memutar audio:', e));
       }
   }
-
+  
   function resetAll() {
       if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           const recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -380,13 +381,14 @@ window.onload = function() {
       const confettiContainer = document.getElementById('lottie-confetti');
       if (confettiContainer) confettiContainer.innerHTML = '';
 
-      const audio = document.getElementById('birthday-audio');
+      // REVISI ID AUDIO DI SINI
+      const audio = document.getElementById('lagu-mp3');
       if (audio) { audio.pause(); audio.currentTime = 0; }
 
       blowInstruction.textContent = "Klik untuk meniup lilin!";
       drawCandle(true, 0, false);
   }
-
+  
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new Recognition();
