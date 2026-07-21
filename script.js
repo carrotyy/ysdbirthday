@@ -62,9 +62,6 @@ btnWorld.addEventListener('click', () => {
     jalankanKembangApi();
   }, 1000);
 })
-    
-  
-});
 
 // ==========================================
 // 2. MESIN KEMBANG API 
