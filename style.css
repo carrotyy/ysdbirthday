@@ -5,12 +5,15 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
   font-family: Arial, sans-serif;
   background-color: #020202;
   color: #f3f3f3;
   overflow-x: hidden;
-  overflow-y: auto; 
+  overflow-y: auto; /* Memastikan scroll vertikal aktif */
+  -webkit-overflow-scrolling: touch; /* Melancarkan scroll di browser iPhone/Safari */
 }
 
 /* --- KEMBANG API & LAYAR PENUTUP --- */
@@ -22,7 +25,7 @@ canvas#birthday {
   width: 100vw;
   height: 100vh;
   z-index: 1; 
-  pointer-events: none; /* Agar sentuhan jari menembus ke scroll */
+  pointer-events: none; /* Agar sentuhan jari langsung menembus ke scroll */
 }
 
 .layar {
@@ -42,9 +45,8 @@ canvas#birthday {
 #layar-hitam { background-color: #000000; z-index: 30; }
 #layar-biru { background-color: #051024; z-index: 20; }
 
-/* PERBAIKAN: Ditambah pointer-events & display agar tidak ngunci layar HP */
 .hilang { 
-  opacity: 0; 
+  opacity: 0 !important; 
   pointer-events: none !important; 
   display: none !important; 
 }
@@ -61,7 +63,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 .waktu span { font-size: 32px; font-weight: bold; }
 .waktu small { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; color: #a0c4ff; }
 
-/* Gaya Tombol Utama (Turn On Lights) */
 .tombol {
   padding: 15px 40px; font-size: 16px; cursor: pointer; border: 1px solid white;
   border-radius: 50px; background-color: transparent; color: white;
@@ -103,7 +104,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   margin: 40px 0 20px;
 }
 
-/* Gambar kue SVG/PNG */
 #cake-png, #cake-svg-img {
   width: 100%;
   height: auto;
@@ -128,7 +128,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 
 #cake-candle-canvas.candle-off { filter: none; opacity: 0.8; }
 
-/* Pesan Ucapan Selamat */
 #congrats-message {
   font-size: 1.2rem; 
   color: #ffe082; 
@@ -141,8 +140,10 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 224, 130, 0.3);
 }
 
-font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
-  color: #ffffff;  /* Dibuat warna PUTIH */
+/* PERBAIKAN: Selector #celebrate-message sudah dipasang dengan benar */
+#celebrate-message {
+  font-size: 2rem; 
+  color: #ffffff; 
   font-weight: bold; 
   margin: 15px 0; 
   text-align: center;
@@ -151,17 +152,9 @@ font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* Responsif untuk HP agar tulisan besar tetap pas di layar */
-@media (max-width: 768px) {
-  #celebrate-message { 
-    font-size: 1.6rem; 
-  }
-}
-
 .container h2 { color: #ffe082; margin: 10px 0 5px; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
 .container p { color: #b0bec5; font-size: 1rem; margin-bottom: 8px; text-align: center; }
 
-/* Buttons Tiup */
 .btn-main, .btn-secondary {
   padding: 15px 40px; 
   font-size: 14px; 
@@ -183,13 +176,11 @@ font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
 }
 
-/* Animations */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
 @keyframes subtleGlow { 0% { text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,224,130,0.3); } 100% { text-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 0 15px rgba(255,224,130,0.5); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-/* Kartu Ucapan Lottie */
 .greeting-card {
   position: absolute; 
   left: 50%; 
@@ -211,12 +202,11 @@ font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
   transform: translate(-50%, -50%) scale(1); 
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   #cake-container { max-width: 90%; margin: 30px 0 15px; }
   #cake-candle-canvas { top: -50px; width: 80px; height: 120px; margin-top: -10px; }
   #congrats-message { font-size: 1rem; margin: 10px 0; display: block; }
-  #celebrate-message { font-size: 1.2rem; margin: 10px 0; }
+  #celebrate-message { font-size: 1.5rem; }
   .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
   .container h2 { font-size: 1.1rem; margin: 8px 0 4px; }
   .greeting-card { max-width: 320px; top: 50%; }
@@ -226,5 +216,5 @@ font-size: 2rem; /* Ukuran dibuat lebih besar (sebelumnya 1.5rem) */
   #cake-container { max-width: 550px; margin: 50px 0 30px; }
   #cake-candle-canvas { top: -90px; width: 120px; height: 160px; filter: drop-shadow(0 0 20px rgba(255, 237, 133, 0.8)) drop-shadow(0 0 40px rgba(255, 213, 0, 0.6)); }
   #congrats-message { font-size: 1.4rem; }
-  #celebrate-message { font-size: 1.7rem; }
+  #celebrate-message { font-size: 2rem; }
 }
