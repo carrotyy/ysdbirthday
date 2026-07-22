@@ -12,8 +12,8 @@ html, body {
   background-color: #020202;
   color: #f3f3f3;
   overflow-x: hidden;
-  overflow-y: auto; /* Memastikan scroll vertikal diizinkan */
-  -webkit-overflow-scrolling: touch; /* Smooth scroll di Safari/iOS */
+  overflow-y: auto; 
+  -webkit-overflow-scrolling: touch; 
 }
 
 /* --- KEMBANG API & LAYAR PENUTUP --- */
@@ -25,7 +25,7 @@ canvas#birthday {
   width: 100vw;
   height: 100vh;
   z-index: 1; 
-  pointer-events: none; /* KUNCI SCROLL HP: Jari menembus canvas kembang api */
+  pointer-events: none; 
 }
 
 .layar {
@@ -104,19 +104,24 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   margin: 40px 0 20px;
 }
 
+/* PERBAIKAN: Menghilangkan latar abu-abu pada gambar */
 #cake-png, #cake-svg-img {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
   z-index: 2;
   position: relative;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: lighten; /* Trik menyatukan area latar abu-abu ke background hitam */
 }
 
+/* PERBAIKAN: Posisi lilin agar pas berada di atas kue */
 #cake-candle-canvas {
   position: absolute;
   left: 50%;
-  top: -70px;
+  top: -45px; /* Disesuaikan agar batang lilin menancap di kue */
   transform: translateX(-50%);
   width: 100px;
   height: 140px;
@@ -140,7 +145,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 224, 130, 0.3);
 }
 
-/* REVISI TULISAN YUSDAA: Warna PUTIH & Ukuran Lebih Besar */
 #celebrate-message {
   font-size: 2rem; 
   color: #ffffff; 
@@ -204,7 +208,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 
 @media (max-width: 768px) {
   #cake-container { max-width: 90%; margin: 30px 0 15px; }
-  #cake-candle-canvas { top: -50px; width: 80px; height: 120px; margin-top: -10px; }
+  #cake-candle-canvas { top: -35px; width: 80px; height: 120px; }
   #congrats-message { font-size: 1rem; margin: 10px 0; display: block; }
   #celebrate-message { font-size: 1.5rem; }
   .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
@@ -214,7 +218,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 
 @media (min-width: 1024px) {
   #cake-container { max-width: 550px; margin: 50px 0 30px; }
-  #cake-candle-canvas { top: -90px; width: 120px; height: 160px; filter: drop-shadow(0 0 20px rgba(255, 237, 133, 0.8)) drop-shadow(0 0 40px rgba(255, 213, 0, 0.6)); }
+  #cake-candle-canvas { top: -55px; width: 120px; height: 160px; }
   #congrats-message { font-size: 1.4rem; }
   #celebrate-message { font-size: 2rem; }
 }
