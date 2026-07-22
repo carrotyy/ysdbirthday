@@ -48,6 +48,7 @@ function mulaiCountdown() {
   countdownInterval = setInterval(hitung, 1000);
 }
 
+// PERBAIKAN: Tanpa auto scroll paksa ke kue
 btnWorld.addEventListener('click', () => {
   layarBiru.classList.add('kembali-hitam');
   btnWorld.classList.add('hilang');
@@ -59,12 +60,6 @@ btnWorld.addEventListener('click', () => {
     // Mulai kembang api
     then = timestamp();
     jalankanKembangApi();
-
-    // OTOMATIS SCROLL HALUS KE BAGIAN KUE DI HP
-    const cakeSection = document.querySelector('.cake-section');
-    if (cakeSection) {
-      cakeSection.scrollIntoView({ behavior: 'smooth' });
-    }
   }, 1000);
 });
 
@@ -98,7 +93,7 @@ class Birthday {
      let count = random(1, 2);
      for(let i = 0; i < count; i++) {
        this.fireworks.push(new Firework(
-          random(this.spawnA, this.spawnB), this.height, x, y, random(0, 260), random(10, 30)
+          random(this.spawnA, this.spawnB), this.height, x, y, random(0, 260), random(15, 35)
        ));
      }
      this.counter = -1;
@@ -114,7 +109,7 @@ class Birthday {
     if (this.counter >= 1) {
       this.fireworks.push(new Firework(
         random(this.spawnA, this.spawnB), this.height, random(0, this.width),
-        random(this.spawnC, this.spawnD), random(0, 360), random(15, 40)
+        random(this.spawnC, this.spawnD), random(0, 360), random(20, 45)
       ));
       this.counter = 0;
     }
@@ -122,6 +117,7 @@ class Birthday {
   }
 }
 
+// PERBAIKAN: Kecepatan & Ledakan Kembang Api Pas
 class Firework {
   constructor(x, y, targetX, targetY, shade, offsprings) {
     this.dead = false; this.offsprings = offsprings; this.x = x; this.y = y;
@@ -138,9 +134,8 @@ class Firework {
       if (this.offsprings && !this.madeChilds) {
         let babies = this.offsprings / 2;
         for (let i = 0; i < babies; i++) {
-          // Perkalian 2.5 agar diameter ledakan mekar jauh lebih BESAR & MEWAH
-          let targetX = this.x + (this.offsprings * 2.5) * Math.cos(PI2 * i / babies) | 0;
-          let targetY = this.y + (this.offsprings * 2.5) * Math.sin(PI2 * i / babies) | 0;
+          let targetX = this.x + (this.offsprings * 1.8) * Math.cos(PI2 * i / babies) | 0;
+          let targetY = this.y + (this.offsprings * 1.8) * Math.sin(PI2 * i / babies) | 0;
           birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0));
         }
       }
@@ -151,13 +146,13 @@ class Firework {
         for (let i = 0; this.history.length > i; i++) {
           let point = this.history[i];
           ctx.beginPath(); ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)';
-          ctx.arc(point.x, point.y, 2.5, 0, PI2, false); 
-          ctx.fill(); // <-- Ditambahkan ctx.fill() agar garis ekor tergambar
+          ctx.arc(point.x, point.y, 2, 0, PI2, false); 
+          ctx.fill();
         } 
       } else {
       ctx.beginPath(); ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)';
-      ctx.arc(this.x, this.y, 3.5, 0, PI2, false); // Ukuran percikan diperbesar jadi 3.5
-      ctx.fill(); // <-- Ditambahkan ctx.fill() agar bintik ledakan tergambar
+      ctx.arc(this.x, this.y, 2.5, 0, PI2, false); 
+      ctx.fill();
     }
   }
 }
@@ -172,6 +167,7 @@ function jalankanKembangApi(){
   then = now;
   birthday.update(delta / 1000);
 }
+
 // ==========================================
 // 3. MESIN TIUP LILIN VIRTUAL
 // ==========================================
@@ -330,7 +326,7 @@ window.onload = function() {
       if (candleCanvas) candleCanvas.classList.add('candle-off');
       if (celebrateMsg) celebrateMsg.style.display = 'block';
       if (blowInstruction) blowInstruction.style.display = 'none';
-      if (instructionText) instructionText.style.display = 'none'; // MENYEMBUNYIKAN PETUNJUK
+      if (instructionText) instructionText.style.display = 'none';
       if (greetingCard) greetingCard.classList.add('show');
 
       showLottieCard();
