@@ -274,3 +274,50 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   #congrats-message { font-size: 1.4rem; }
   #celebrate-message { font-size: 2rem; }
 }
+/* =========================================
+   LAYAR CATATAN TAMBAHAN
+   ========================================= */
+#layar-catatan {
+  background-color: #080808; /* Latar belakang gelap polos */
+  z-index: 60; /* Z-index lebih tinggi agar menumpuk di atas layar wishes */
+  transition: opacity 0.8s ease;
+  overflow-y: auto;
+  justify-content: center; /* Posisikan di tengah layar */
+  padding: 20px;
+}
+
+.catatan-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+}
+
+.catatan-box {
+  background-color: rgba(30, 30, 30, 0.8); /* Kotak abu-abu sangat gelap */
+  border: 1px solid #444; /* Garis tepi tipis agar elegan */
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  color: #f3f3f3;
+}
+
+/* Judul Catatan (Tetap pakai font ala tulisan tangan) */
+.catatan-box h2 {
+  font-family: 'Caveat', cursive; 
+  color: #ffe082; /* Warna kuning emas */
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5); /* Bayangan teks simpel */
+}
+
+/* Teks Paragraf Catatan */
+.catatan-box p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #cccccc;
+}
