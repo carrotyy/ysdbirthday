@@ -49,12 +49,25 @@ canvas#birthday {
 #layar-wishes {
   background: url('img-wishes.jpg') no-repeat center center;
   background-size: cover;
-  z-index: 50; /* Z-index tinggi agar tampil di atas segalanya */
+  background-attachment: fixed; /* Mencegah foto terpotong berlebihan saat di-scroll */
+  z-index: 50;
   transition: opacity 1s ease;
+  overflow-y: auto; /* Memungkinkan scroll jika layar tidak muat */
+  justify-content: flex-start; /* Berubah agar konten tidak kepotong di atas saat panjang */
+  padding: 10vh 20px 50px 20px; /* Jarak agar tidak terlalu mepet layar */
+}
+
+/* Pembungkus konten agar rapi di tengah */
+.wishes-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
 }
 
 .wishes-box {
-  background-color: rgba(255, 255, 255, 0.7); /* Background semi-putih */
+  background-color: rgba(255, 255, 255, 0.7); 
   padding: 40px 30px;
   border-radius: 15px;
   max-width: 80%;
@@ -63,7 +76,7 @@ canvas#birthday {
 }
 
 .wishes-box h2 {
-  font-family: 'Caveat', cursive; /* Ini kode untuk memanggil font Caveat */
+  font-family: 'Caveat', cursive; 
   color: #000000; 
   text-shadow: 
     2px 2px 0 #ffffff, 
@@ -71,10 +84,19 @@ canvas#birthday {
     2px -2px 0 #ffffff, 
     -2px 2px 0 #ffffff,
     0 0 15px rgba(255,255,255, 0.8);
-  font-size: 2.8rem; /* Sedikit dibesarkan karena font ini aslinya agak kecil */
-  font-weight: 700; /* Ditebalkan sedikit biar lebih jelas di atas foto */
+  font-size: 2.8rem;
+  font-weight: 700;
   margin: 0;
   letter-spacing: 1px;
+}
+
+/* Gaya khusus untuk jejeran 3 tombol */
+.wishes-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  z-index: 55;
 }
 
 .hilang { 
