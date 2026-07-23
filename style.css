@@ -257,23 +257,13 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   transform: translate(-50%, -50%) scale(1); 
 }
 
-@media (max-width: 768px) {
-  #cake-container { max-width: 90%; margin: 30px 0 15px; }
-  #cake-candle-canvas { top: -35px; width: 80px; height: 120px; }
-  #congrats-message { font-size: 1rem; margin: 10px 0; display: block; }
-  #celebrate-message { font-size: 1.5rem; }
-  .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
-  .container h2 { font-size: 1.1rem; margin: 8px 0 4px; }
-  .greeting-card { max-width: 320px; top: 50%; }
-  .wishes-box h2 { font-size: 1.5rem; } /* Font disesuaikan untuk HP */
-}
-
 @media (min-width: 1024px) {
   #cake-container { max-width: 550px; margin: 50px 0 30px; }
   #cake-candle-canvas { top: -55px; width: 120px; height: 160px; }
   #congrats-message { font-size: 1.4rem; }
   #celebrate-message { font-size: 2rem; }
 }
+
 /* =========================================
    LAYAR CATATAN TAMBAHAN
    ========================================= */
@@ -305,7 +295,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   color: #f3f3f3;
 }
 
-/* Judul Catatan (Tetap pakai font ala tulisan tangan) */
+/* Judul Catatan */
 .catatan-box h2 {
   font-family: 'Caveat', cursive; 
   color: #ffe082; /* Warna kuning emas */
@@ -320,4 +310,22 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   font-size: 1.1rem;
   line-height: 1.8;
   color: #cccccc;
+}
+
+/* =========================================
+   RESPONSIF UNTUK HP (MAX-WIDTH 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  #cake-container { max-width: 90%; margin: 30px 0 15px; }
+  #cake-candle-canvas { top: -35px; width: 80px; height: 120px; }
+  #congrats-message { font-size: 1rem; margin: 10px 0; display: block; }
+  #celebrate-message { font-size: 1.5rem; }
+  .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
+  .container h2 { font-size: 1.1rem; margin: 8px 0 4px; }
+  .greeting-card { max-width: 320px; top: 50%; }
+  .wishes-box h2 { font-size: 1.5rem; } 
+  
+  /* Tambahan biar judul catatan nggak kebesaran di HP */
+  .catatan-box h2 { font-size: 2rem; } 
+  .catatan-box p { font-size: 0.9rem; }
 }
