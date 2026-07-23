@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>let's celebrate together!!</title>
 
-  <!-- Font Caveat dari Google Fonts untuk layar Wishes -->
+  <!-- Font Caveat dari Google Fonts untuk layar Wishes & Catatan -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
@@ -48,7 +48,6 @@
  
           <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
             
-            <!-- Teks lama dihapus, menyisakan div kosong agar JS tidak error -->
             <div id="congrats-message" style="display: none;"></div>
  
             <div id="celebrate-message" style="display: none;">
@@ -56,7 +55,7 @@
               <audio id="lagu-mp3" src="lagu.mp3"></audio>
             </div>
  
-            <!-- Tombol Baru Wishes dan Reset -->
+            <!-- Tombol Wishes dan Reset -->
             <button class="btn-main" id="btn-wishes" style="display: none;">Wishes</button>
             <button class="btn-secondary" id="reset-btn" style="display: none;">Tiup Lilin Lagi</button>
           </div>
@@ -76,18 +75,20 @@
   <div id="layar-wishes" class="layar hilang">
     <div class="wishes-content-wrapper">
       <div class="wishes-box">
-        <h2>Pertama, tentu saja ucapan "Selamat ulang tahun". Doanya masih sama, untuk kamu pasti yang baik-baik. Selalu. </h2>
+        <h2>Pertama, tentu saja ucapan "Selamat ulang tahun". Doanya masih sama, untuk kamu pasti yang baik-baik. Selalu.</h2>
       </div>
       
-      <!-- Tambahan 3 Tombol Baru -->
+      <!-- Tombol Navigasi Wishes -->
       <div class="wishes-controls">
         <button class="btn-main" id="btn-toggle-music">Turn Off Music</button>
         <button class="btn-main" id="btn-next-music">Next Music</button>
-        <!-- ID di bawah ini sudah diganti agar unik -->
         <button class="btn-main" id="btn-catatan">Catatan Tambahan</button>
         <button class="btn-secondary" id="btn-back-cake">Kembali ke Tiup Lilin</button>
       </div>
-      <!-- LAYAR CATATAN (Halaman Baru) -->
+    </div>
+  </div>
+
+  <!-- LAYAR CATATAN (Halaman Baru) -->
   <div id="layar-catatan" class="layar hilang">
     <div class="catatan-content-wrapper">
       <div class="catatan-box">
