@@ -104,11 +104,9 @@ class Birthday {
     ctx.globalCompositeOperation = 'lighter';
     for (let firework of this.fireworks) firework.update(delta);
 
-    // PERBAIKAN: Kecepatan spawn dipercepat (dari 0.3 jadi 1.5)
     this.counter += delta * 1.5; 
     
     if (this.counter >= 1) {
-      // PERBAIKAN: Meledakkan 3-4 kembang api sekaligus di titik yang berdekatan dengan warna acak
       let jumlahLedakan = random(3, 4);
       let targetX = random(0, this.width);
       let targetY = random(this.spawnC, this.spawnD);
@@ -116,9 +114,9 @@ class Birthday {
       for(let i = 0; i < jumlahLedakan; i++) {
         this.fireworks.push(new Firework(
           random(this.spawnA, this.spawnB), this.height, 
-          targetX + random(-50, 50), // Menyebar sedikit di sekitar target
+          targetX + random(-50, 50), 
           targetY + random(-50, 50), 
-          random(0, 360), // Warna full random agar cantik
+          random(0, 360), 
           random(20, 45)
         ));
       }
@@ -306,7 +304,7 @@ window.onload = function() {
   const greetingCard = document.getElementById('greeting-card');
   const resetBtn = document.getElementById('reset-btn');
   const congratsMsg = document.getElementById('congrats-message');
-  const btnWishes = document.getElementById('btn-wishes'); // Tombol Wishes
+  const btnWishes = document.getElementById('btn-wishes');
 
   function showLottieCard() {
       const container = document.getElementById('lottie-confetti');
@@ -322,8 +320,6 @@ window.onload = function() {
           }).addEventListener('complete', function() {
               if (congratsMsg) congratsMsg.style.display = 'block';
               if (resetBtn) resetBtn.style.display = 'inline-block';
-              
-              // Tampilkan tombol wishes setelah animasi selesai
               if (btnWishes) btnWishes.style.display = 'inline-block'; 
           });
       }
@@ -370,7 +366,7 @@ window.onload = function() {
       if (greetingCard) greetingCard.classList.remove('show');
       if (congratsMsg) congratsMsg.style.display = 'none';
       if (resetBtn) resetBtn.style.display = 'none';
-      if (btnWishes) btnWishes.style.display = 'none'; // Sembunyikan Wishes saat reset
+      if (btnWishes) btnWishes.style.display = 'none'; 
 
       const confettiContainer = document.getElementById('lottie-confetti');
       if (confettiContainer) confettiContainer.innerHTML = '';
@@ -385,7 +381,6 @@ window.onload = function() {
   // EVENT LISTENER UNTUK TOMBOL WISHES
   if(btnWishes) {
       btnWishes.addEventListener('click', () => {
-          // Buka Layar Wishes
           const layarWishes = document.getElementById('layar-wishes');
           if(layarWishes) {
               layarWishes.classList.remove('hilang');
@@ -474,22 +469,20 @@ window.onload = function() {
 // ==========================================
 // 4. KONTROL MUSIK & NAVIGASI WISHES
 // ==========================================
-
 const audioEl = document.getElementById('lagu-mp3');
 const btnToggleMusic = document.getElementById('btn-toggle-music');
 const btnNextMusic = document.getElementById('btn-next-music');
 const btnBackCake = document.getElementById('btn-back-cake');
 const layarWishes = document.getElementById('layar-wishes');
 
-// Playlist lagu: Masukkan path file musik tambahanmu di sini
+// Playlist lagu
 const playlist = [
-    'lagu.mp3', // Lagu utama
-    'next music/lagu2.mp3', // Lagu kedua
-    'next music/lagu3.mp3'  // Lagu ketiga
+    'lagu.mp3', 
+    'next music/lagu2.mp3', 
+    'next music/lagu3.mp3'  
 ];
 let currentTrackIdx = 0;
 
-// FUNGSI TURN OFF / TURN ON MUSIC
 if (btnToggleMusic) {
     btnToggleMusic.addEventListener('click', () => {
         if (!audioEl.paused) {
@@ -502,21 +495,15 @@ if (btnToggleMusic) {
     });
 }
 
-// FUNGSI NEXT MUSIC
 if (btnNextMusic) {
     btnNextMusic.addEventListener('click', () => {
-        // Pindah ke index lagu berikutnya, jika sudah habis kembali ke 0
         currentTrackIdx = (currentTrackIdx + 1) % playlist.length;
-        
         audioEl.src = playlist[currentTrackIdx];
         audioEl.play().catch(e => console.log('Error play audio:', e));
-        
-        // Pastikan tombol toggle kembali ke status "Turn Off Music"
         if (btnToggleMusic) btnToggleMusic.textContent = 'Turn Off Music';
     });
 }
 
-// FUNGSI KEMBALI KE TIUP LILIN
 if (btnBackCake) {
     btnBackCake.addEventListener('click', () => {
         if (layarWishes) {
@@ -524,6 +511,7 @@ if (btnBackCake) {
         }
     });
 }
+
 // ==========================================
 // 5. NAVIGASI LAYAR CATATAN TAMBAHAN
 // ==========================================
@@ -531,7 +519,6 @@ const btnCatatan = document.getElementById('btn-catatan');
 const layarCatatan = document.getElementById('layar-catatan');
 const btnBackWishes = document.getElementById('btn-back-wishes');
 
-// Fungsi Membuka Layar Catatan
 if (btnCatatan) {
     btnCatatan.addEventListener('click', () => {
         if (layarCatatan) {
@@ -540,7 +527,6 @@ if (btnCatatan) {
     });
 }
 
-// Fungsi Kembali ke Layar Wishes
 if (btnBackWishes) {
     btnBackWishes.addEventListener('click', () => {
         if (layarCatatan) {
