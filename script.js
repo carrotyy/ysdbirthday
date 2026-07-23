@@ -470,3 +470,57 @@ window.onload = function() {
   drawCandle(true, 0, false);
   animateCandle();
 };
+
+// ==========================================
+// 4. KONTROL MUSIK & NAVIGASI WISHES
+// ==========================================
+
+const audioEl = document.getElementById('lagu-mp3');
+const btnToggleMusic = document.getElementById('btn-toggle-music');
+const btnNextMusic = document.getElementById('btn-next-music');
+const btnBackCake = document.getElementById('btn-back-cake');
+const layarWishes = document.getElementById('layar-wishes');
+
+// Playlist lagu: Masukkan path file musik tambahanmu di sini
+const playlist = [
+    'lagu.mp3', // Lagu utama
+    'next music/lagu2.mp3', // Lagu kedua
+    'next music/lagu3.mp3'  // Lagu ketiga
+];
+let currentTrackIdx = 0;
+
+// FUNGSI TURN OFF / TURN ON MUSIC
+if (btnToggleMusic) {
+    btnToggleMusic.addEventListener('click', () => {
+        if (!audioEl.paused) {
+            audioEl.pause();
+            btnToggleMusic.textContent = 'Turn On Music';
+        } else {
+            audioEl.play().catch(e => console.log('Error play audio:', e));
+            btnToggleMusic.textContent = 'Turn Off Music';
+        }
+    });
+}
+
+// FUNGSI NEXT MUSIC
+if (btnNextMusic) {
+    btnNextMusic.addEventListener('click', () => {
+        // Pindah ke index lagu berikutnya, jika sudah habis kembali ke 0
+        currentTrackIdx = (currentTrackIdx + 1) % playlist.length;
+        
+        audioEl.src = playlist[currentTrackIdx];
+        audioEl.play().catch(e => console.log('Error play audio:', e));
+        
+        // Pastikan tombol toggle kembali ke status "Turn Off Music"
+        if (btnToggleMusic) btnToggleMusic.textContent = 'Turn Off Music';
+    });
+}
+
+// FUNGSI KEMBALI KE TIUP LILIN
+if (btnBackCake) {
+    btnBackCake.addEventListener('click', () => {
+        if (layarWishes) {
+            layarWishes.classList.add('hilang');
+        }
+    });
+}
