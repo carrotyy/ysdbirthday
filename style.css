@@ -49,12 +49,12 @@ canvas#birthday {
 #layar-wishes {
   background: url('img-wishes.jpg') no-repeat center center;
   background-size: cover;
-  background-attachment: fixed; /* Mencegah foto terpotong berlebihan saat di-scroll */
+  background-attachment: fixed;
   z-index: 50;
   transition: opacity 1s ease;
-  overflow-y: auto; /* Memungkinkan scroll jika layar tidak muat */
-  justify-content: flex-start; /* Berubah agar konten tidak kepotong di atas saat panjang */
-  padding: 10vh 20px 50px 20px; /* Jarak agar tidak terlalu mepet layar */
+  overflow-y: auto; 
+  justify-content: flex-start; 
+  padding: 10vh 20px 50px 20px;
 }
 
 /* Pembungkus konten agar rapi di tengah */
@@ -90,7 +90,7 @@ canvas#birthday {
   letter-spacing: 1px;
 }
 
-/* Gaya khusus untuk jejeran 3 tombol */
+/* Gaya khusus untuk jejeran tombol */
 .wishes-controls {
   display: flex;
   flex-wrap: wrap;
@@ -99,6 +99,53 @@ canvas#birthday {
   z-index: 55;
 }
 
+/* =========================================
+   LAYAR CATATAN TAMBAHAN
+   ========================================= */
+#layar-catatan {
+  background-color: #080808;
+  z-index: 60;
+  transition: opacity 0.8s ease;
+  overflow-y: auto;
+  justify-content: center;
+  padding: 20px;
+}
+
+.catatan-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+}
+
+.catatan-box {
+  background-color: rgba(30, 30, 30, 0.8);
+  border: 1px solid #444; 
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  color: #f3f3f3;
+}
+
+.catatan-box h2 {
+  font-family: 'Caveat', cursive; 
+  color: #ffe082;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+}
+
+.catatan-box p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #cccccc;
+}
+
+/* CLASS UTILITAS */
 .hilang { 
   opacity: 0 !important; 
   pointer-events: none !important; 
@@ -117,17 +164,18 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 .waktu span { font-size: 32px; font-weight: bold; }
 .waktu small { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; color: #a0c4ff; }
 
-.tombol {
-  padding: 15px 40px; font-size: 16px; cursor: pointer; border: 1px solid white;
+.tombol, .btn-main, .btn-secondary {
+  padding: 15px 40px; font-size: 14px; cursor: pointer; border: 1px solid white;
   border-radius: 50px; background-color: transparent; color: white;
-  letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s;
+  letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; margin-top: 15px; z-index: 10;
 }
-.tombol:hover { background-color: white; color: black; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+.tombol:hover, .btn-main:hover, .btn-secondary:hover { 
+  background-color: white; color: black; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
+}
 
 /* =========================================
    BAGIAN KUE ULANG TAHUN & TIUP LILIN
    ========================================= */
-
 .cake-section {
   position: relative;
   margin-top: 100vh; 
@@ -157,7 +205,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   margin: 40px 0 20px;
 }
 
-#cake-png, #cake-svg-img {
+#cake-png {
   width: 100%;
   height: auto;
   display: block;
@@ -185,51 +233,19 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 #cake-candle-canvas.candle-off { filter: none; opacity: 0.8; }
 
 #congrats-message {
-  font-size: 1.2rem; 
-  color: #ffe082; 
-  font-weight: normal; 
-  margin: 10px 0; 
-  text-align: center;
-  line-height: 1.5; 
-  display: block; 
-  animation: fadeIn 0.8s ease-out, subtleGlow 2s ease-in-out infinite alternate;
+  font-size: 1.2rem; color: #ffe082; font-weight: normal; margin: 10px 0; text-align: center;
+  line-height: 1.5; display: block; animation: fadeIn 0.8s ease-out, subtleGlow 2s ease-in-out infinite alternate;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 224, 130, 0.3);
 }
 
 #celebrate-message {
-  font-size: 2rem; 
-  color: #ffffff; 
-  font-weight: bold; 
-  margin: 15px 0; 
-  text-align: center;
-  display: none;
-  animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), float 3s ease-in-out infinite;
+  font-size: 2rem; color: #ffffff; font-weight: bold; margin: 15px 0; text-align: center;
+  display: none; animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), float 3s ease-in-out infinite;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .container h2 { color: #ffe082; margin: 10px 0 5px; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
 .container p { color: #b0bec5; font-size: 1rem; margin-bottom: 8px; text-align: center; }
-
-.btn-main, .btn-secondary {
-  padding: 15px 40px; 
-  font-size: 14px; 
-  cursor: pointer; 
-  border: 1px solid white;
-  border-radius: 50px; 
-  background-color: transparent; 
-  color: white;
-  letter-spacing: 2px; 
-  text-transform: uppercase; 
-  transition: all 0.3s; 
-  margin-top: 15px;
-  z-index: 10;
-}
-
-.btn-main:hover, .btn-secondary:hover { 
-  background-color: white; 
-  color: black; 
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
-}
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
@@ -237,79 +253,19 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
 .greeting-card {
-  position: absolute; 
-  left: 50%; 
-  top: 50%; 
-  transform: translate(-50%, -50%); 
-  z-index: 15;
-  width: 90%; 
-  max-width: 420px; 
-  pointer-events: none; 
-  opacity: 0;
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); 
+  z-index: 15; width: 90%; max-width: 420px; pointer-events: none; opacity: 0;
   transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  perspective: 1200px; 
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  perspective: 1200px; filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
 }
 
-.greeting-card.show { 
-  opacity: 1; 
-  pointer-events: auto; 
-  transform: translate(-50%, -50%) scale(1); 
-}
+.greeting-card.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
 
 @media (min-width: 1024px) {
   #cake-container { max-width: 550px; margin: 50px 0 30px; }
   #cake-candle-canvas { top: -55px; width: 120px; height: 160px; }
   #congrats-message { font-size: 1.4rem; }
   #celebrate-message { font-size: 2rem; }
-}
-
-/* =========================================
-   LAYAR CATATAN TAMBAHAN
-   ========================================= */
-#layar-catatan {
-  background-color: #080808; /* Latar belakang gelap polos */
-  z-index: 60; /* Z-index lebih tinggi agar menumpuk di atas layar wishes */
-  transition: opacity 0.8s ease;
-  overflow-y: auto;
-  justify-content: center; /* Posisikan di tengah layar */
-  padding: 20px;
-}
-
-.catatan-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 30px;
-}
-
-.catatan-box {
-  background-color: rgba(30, 30, 30, 0.8); /* Kotak abu-abu sangat gelap */
-  border: 1px solid #444; /* Garis tepi tipis agar elegan */
-  padding: 40px 30px;
-  border-radius: 15px;
-  max-width: 80%;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  color: #f3f3f3;
-}
-
-/* Judul Catatan */
-.catatan-box h2 {
-  font-family: 'Caveat', cursive; 
-  color: #ffe082; /* Warna kuning emas */
-  font-size: 3rem;
-  margin-bottom: 20px;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 5px rgba(0,0,0,0.5); /* Bayangan teks simpel */
-}
-
-/* Teks Paragraf Catatan */
-.catatan-box p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #cccccc;
 }
 
 /* =========================================
@@ -320,12 +276,10 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   #cake-candle-canvas { top: -35px; width: 80px; height: 120px; }
   #congrats-message { font-size: 1rem; margin: 10px 0; display: block; }
   #celebrate-message { font-size: 1.5rem; }
-  .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
+  .btn-main, .btn-secondary, .tombol { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
   .container h2 { font-size: 1.1rem; margin: 8px 0 4px; }
   .greeting-card { max-width: 320px; top: 50%; }
   .wishes-box h2 { font-size: 1.5rem; } 
-  
-  /* Tambahan biar judul catatan nggak kebesaran di HP */
   .catatan-box h2 { font-size: 2rem; } 
   .catatan-box p { font-size: 0.9rem; }
 }
