@@ -48,7 +48,6 @@ function mulaiCountdown() {
   countdownInterval = setInterval(hitung, 1000);
 }
 
-// PERBAIKAN: Tanpa auto scroll paksa ke kue
 btnWorld.addEventListener('click', () => {
   layarBiru.classList.add('kembali-hitam');
   btnWorld.classList.add('hilang');
@@ -105,19 +104,30 @@ class Birthday {
     ctx.globalCompositeOperation = 'lighter';
     for (let firework of this.fireworks) firework.update(delta);
 
-    this.counter += delta * 0.3; 
+    // PERBAIKAN: Kecepatan spawn dipercepat (dari 0.3 jadi 1.5)
+    this.counter += delta * 1.5; 
+    
     if (this.counter >= 1) {
-      this.fireworks.push(new Firework(
-        random(this.spawnA, this.spawnB), this.height, random(0, this.width),
-        random(this.spawnC, this.spawnD), random(0, 360), random(20, 45)
-      ));
+      // PERBAIKAN: Meledakkan 3-4 kembang api sekaligus di titik yang berdekatan dengan warna acak
+      let jumlahLedakan = random(3, 4);
+      let targetX = random(0, this.width);
+      let targetY = random(this.spawnC, this.spawnD);
+      
+      for(let i = 0; i < jumlahLedakan; i++) {
+        this.fireworks.push(new Firework(
+          random(this.spawnA, this.spawnB), this.height, 
+          targetX + random(-50, 50), // Menyebar sedikit di sekitar target
+          targetY + random(-50, 50), 
+          random(0, 360), // Warna full random agar cantik
+          random(20, 45)
+        ));
+      }
       this.counter = 0;
     }
     if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead);
   }
 }
 
-// PERBAIKAN: Kecepatan & Ledakan Kembang Api Pas
 class Firework {
   constructor(x, y, targetX, targetY, shade, offsprings) {
     this.dead = false; this.offsprings = offsprings; this.x = x; this.y = y;
@@ -296,6 +306,7 @@ window.onload = function() {
   const greetingCard = document.getElementById('greeting-card');
   const resetBtn = document.getElementById('reset-btn');
   const congratsMsg = document.getElementById('congrats-message');
+  const btnWishes = document.getElementById('btn-wishes'); // Tombol Wishes
 
   function showLottieCard() {
       const container = document.getElementById('lottie-confetti');
@@ -311,6 +322,9 @@ window.onload = function() {
           }).addEventListener('complete', function() {
               if (congratsMsg) congratsMsg.style.display = 'block';
               if (resetBtn) resetBtn.style.display = 'inline-block';
+              
+              // Tampilkan tombol wishes setelah animasi selesai
+              if (btnWishes) btnWishes.style.display = 'inline-block'; 
           });
       }
   }
@@ -356,6 +370,7 @@ window.onload = function() {
       if (greetingCard) greetingCard.classList.remove('show');
       if (congratsMsg) congratsMsg.style.display = 'none';
       if (resetBtn) resetBtn.style.display = 'none';
+      if (btnWishes) btnWishes.style.display = 'none'; // Sembunyikan Wishes saat reset
 
       const confettiContainer = document.getElementById('lottie-confetti');
       if (confettiContainer) confettiContainer.innerHTML = '';
@@ -367,6 +382,17 @@ window.onload = function() {
       drawCandle(true, 0, false);
   }
   
+  // EVENT LISTENER UNTUK TOMBOL WISHES
+  if(btnWishes) {
+      btnWishes.addEventListener('click', () => {
+          // Buka Layar Wishes
+          const layarWishes = document.getElementById('layar-wishes');
+          if(layarWishes) {
+              layarWishes.classList.remove('hilang');
+          }
+      });
+  }
+
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new Recognition();
