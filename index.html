@@ -27,45 +27,53 @@
     <button id="btn-world" class="tombol tersembunyi">Into Your World</button>
   </div>
 
-  <!-- Kanvas Kembang Api (Dibuat fixed di belakang) -->
+  <!-- Kanvas Kembang Api -->
   <canvas id="birthday"></canvas>
 
-  <!-- BAGIAN KUE ULANG TAHUN (Di-scroll ke bawah) -->
+  <!-- BAGIAN KUE ULANG TAHUN -->
   <div class="cake-section">
     <div class="container">
       <div id="cake-container">
-        <!-- PASTIKAN GAMBAR KUE ADA DI FOLDER YANG BENAR -->
         <img id="cake-png" src="cake.png" alt="Kue Ulang Tahun">
         <canvas id="cake-candle-canvas"></canvas>
-  
+ 
         <div class="greeting-card" id="greeting-card">
           <div id="lottie-confetti" style="width:320px;max-width:90vw;margin:0 auto;"></div>
-  
+ 
           <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
-            <div id="congrats-message" style="display: none;">
-              Semoga harimu-harimu dipenuhi kebahagiaan dan tahun ini penuh dengan kejutan indah. Selamat Ulang Tahun!
-            </div>
-  
+            
+            <!-- Teks lama dihapus, menyisakan div kosong agar JS tidak error -->
+            <div id="congrats-message" style="display: none;"></div>
+ 
             <div id="celebrate-message" style="display: none;">
               🎉 Happy Birthday YUSDAA! 🎉
-              <!-- PASTIKAN AUDIO ADA DI FOLDER YANG BENAR -->
               <audio id="lagu-mp3" src="lagu.mp3"></audio>
             </div>
-  
+ 
+            <!-- Tombol Baru Wishes dan Reset -->
+            <button class="btn-main" id="btn-wishes" style="display: none;">Wishes</button>
             <button class="btn-secondary" id="reset-btn" style="display: none;">Ulangi Lagi</button>
           </div>
         </div>
       </div>
-  
-     <button class="btn-main" id="blow-instruction">Klik untuk meniup lilin!</button>
+ 
+      <button class="btn-main" id="blow-instruction">Klik untuk meniup lilin!</button>
 
-      <!-- TAMBAHKAN ID instruction-text DI SINI -->
       <div id="instruction-text">
         <p style="margin-top: 20px; text-align: center;">Pertama, buatlah permohonan. Lalu katakan:</p>
         <h2 style="margin-top: 5px; text-align: center;">"Happy birthday!" lalu tiup layarmu!</h2>
       </div>
+    </div>
+  </div>
 
-  <!-- Script Lottie untuk Animasi Confetti -->
+  <!-- LAYAR WISHES (Halaman Baru) -->
+  <div id="layar-wishes" class="layar hilang">
+    <div class="wishes-box">
+      <h2>Uji coba untuk tulisan wishes</h2>
+    </div>
+  </div>
+
+  <!-- Script -->
   <script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
   <script src="script.js"></script>
 </body>
