@@ -45,6 +45,37 @@ canvas#birthday {
 #layar-hitam { background-color: #000000; z-index: 30; }
 #layar-biru { background-color: #051024; z-index: 20; }
 
+/* LAYAR WISHES BARU */
+#layar-wishes {
+  background: url('img-wishes.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: 50; /* Z-index tinggi agar tampil di atas segalanya */
+  transition: opacity 1s ease;
+}
+
+.wishes-box {
+  background-color: rgba(255, 255, 255, 0.7); /* Background semi-putih */
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.wishes-box h2 {
+  color: #000000; /* Font Hitam */
+  /* Layering / border font warna putih */
+  text-shadow: 
+    2px 2px 0 #ffffff, 
+    -2px -2px 0 #ffffff, 
+    2px -2px 0 #ffffff, 
+    -2px 2px 0 #ffffff,
+    0 0 15px rgba(255,255,255, 0.8);
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
 .hilang { 
   opacity: 0 !important; 
   pointer-events: none !important; 
@@ -69,7 +100,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s;
 }
 .tombol:hover { background-color: white; color: black; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
-
 
 /* =========================================
    BAGIAN KUE ULANG TAHUN & TIUP LILIN
@@ -104,7 +134,6 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   margin: 40px 0 20px;
 }
 
-/* PERBAIKAN: Menghilangkan latar abu-abu pada gambar */
 #cake-png, #cake-svg-img {
   width: 100%;
   height: auto;
@@ -114,14 +143,13 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  mix-blend-mode: lighten; /* Trik menyatukan area latar abu-abu ke background hitam */
+  mix-blend-mode: lighten;
 }
 
-/* PERBAIKAN: Posisi lilin agar pas berada di atas kue */
 #cake-candle-canvas {
   position: absolute;
   left: 50%;
-  top: -45px; /* Disesuaikan agar batang lilin menancap di kue */
+  top: -45px; 
   transform: translateX(-50%);
   width: 100px;
   height: 140px;
@@ -214,6 +242,7 @@ h2 { font-weight: normal; letter-spacing: 2px; margin-bottom: 30px; text-align: 
   .btn-main, .btn-secondary { padding: 12px 30px; font-size: 12px; margin-top: 10px; }
   .container h2 { font-size: 1.1rem; margin: 8px 0 4px; }
   .greeting-card { max-width: 320px; top: 50%; }
+  .wishes-box h2 { font-size: 1.5rem; } /* Font disesuaikan untuk HP */
 }
 
 @media (min-width: 1024px) {
