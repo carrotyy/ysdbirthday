@@ -63,15 +63,16 @@ canvas#birthday {
 }
 
 .wishes-box h2 {
-  color: #000000; /* Font Hitam */
-  /* Layering / border font warna putih */
+  font-family: 'Caveat', cursive; /* Ini kode untuk memanggil font Caveat */
+  color: #000000; 
   text-shadow: 
     2px 2px 0 #ffffff, 
     -2px -2px 0 #ffffff, 
     2px -2px 0 #ffffff, 
     -2px 2px 0 #ffffff,
     0 0 15px rgba(255,255,255, 0.8);
-  font-size: 2rem;
+  font-size: 2.8rem; /* Sedikit dibesarkan karena font ini aslinya agak kecil */
+  font-weight: 700; /* Ditebalkan sedikit biar lebih jelas di atas foto */
   margin: 0;
   letter-spacing: 1px;
 }
