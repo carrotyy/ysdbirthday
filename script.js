@@ -524,3 +524,27 @@ if (btnBackCake) {
         }
     });
 }
+// ==========================================
+// 5. NAVIGASI LAYAR CATATAN TAMBAHAN
+// ==========================================
+const btnCatatan = document.getElementById('btn-catatan');
+const layarCatatan = document.getElementById('layar-catatan');
+const btnBackWishes = document.getElementById('btn-back-wishes');
+
+// Fungsi Membuka Layar Catatan
+if (btnCatatan) {
+    btnCatatan.addEventListener('click', () => {
+        if (layarCatatan) {
+            layarCatatan.classList.remove('hilang');
+        }
+    });
+}
+
+// Fungsi Kembali ke Layar Wishes
+if (btnBackWishes) {
+    btnBackWishes.addEventListener('click', () => {
+        if (layarCatatan) {
+            layarCatatan.classList.add('hilang');
+        }
+    });
+}
