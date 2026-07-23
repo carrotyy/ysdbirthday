@@ -477,9 +477,9 @@ const layarWishes = document.getElementById('layar-wishes');
 
 // Playlist lagu
 const playlist = [
-    'lagu.mp3', 
-    'next music/lagu2.mp3', 
-    'next music/lagu3.mp3'  
+    'lagu.mp3', // Lagu utama yang ada di luar
+    'next music/NCT U - Make A Wish.mp3', // Lagu di dalam folder next music
+    'next music/lagu.mp3' //
 ];
 let currentTrackIdx = 0;
 
